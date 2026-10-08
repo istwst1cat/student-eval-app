@@ -12,7 +12,7 @@ Developed independently by **Issac Qaiser** as a cornerstone portfolio display f
 * **Relational Storage Layer:** Automatically maps data inputs to an isolated SQLite backend engine (`performance_records.db`), securing permanent data persistence on the local storage disk.
 * **Data Integrity Validation:** Houses strict boundary math validation loops that ensure student grades settle precisely within valid academic limits (0-100).
 * **Mathematical Balance Safeguards:** Automatically adds individual subject marks in the background to verify that the computed sum balances perfectly with the manual entry total, blocking anomalous or corrupted data entries.
-* **Automated Data Cleaning:** Utilizes functional entry helper wrappers to clear whitespace data, enforce standard title-casing format, and maintain clean database structure.
+* **Automated Data Cleaning:** Utilizes smart shortcuts to clear whitespace data, enforce standard title-casing format, and maintain standard database structure.
 
 ---
 
