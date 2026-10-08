@@ -1,5 +1,5 @@
 # 🏫 Student Performance Evaluation Console
-### *Independent Relational Database Application Portfolio Highlight*
+### *Independent Relational Database Application*
 
 A clean, desktop application built from scratch to streamline academic data entry and performance logging. This terminal features a structural Graphical User Interface (GUI), enforces strict boundary data validation logic, and implements permanent data storage through a native relational database layer.
 
