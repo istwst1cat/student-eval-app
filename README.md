@@ -7,7 +7,7 @@ Developed independently by **Issac Qaiser** as a cornerstone portfolio display f
 
 ---
 
-##✨Features✨
+## ✨Features✨
 
 * **Relational Storage Layer:** Automatically maps data inputs to an isolated SQLite backend engine (`performance_records.db`), securing permanent data persistence on the local storage disk.
 * **Data Integrity Validation:** Houses strict boundary math validation loops that ensure student grades settle precisely within valid academic limits (0-100).
