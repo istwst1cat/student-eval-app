@@ -23,10 +23,6 @@ To launch this desktop application locally, your runtime environment only requir
 * **`tkinter`** - Compiles the functional windows, drop-down menus, and user interaction frames.
 * **`sqlite3`** - Operates the localized SQL relational query strings and disk indexing logic.
 * **`datetime`** - Automatically captures real-time data entry timestamps.
-
-Create a `requirements.txt` file in your repository root directory containing:
-```text
-# No external package installations required (Uses Python native frameworks)
 ```
 
 ---
