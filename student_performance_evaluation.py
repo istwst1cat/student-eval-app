@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from datetime import datetime
 
-# ----------------- RELATIONAL DATABASE SYSTEM LAYER -----------------
+#  RELATIONAL DATABASE SYSTEM LAYER 
 class PerformanceDatabase:
     def __init__(self, db_name="performance_records.db"):
         """Initializes secure relational SQLite data architecture."""
@@ -48,18 +48,18 @@ class PerformanceDatabase:
 # Initialize database globally
 db = PerformanceDatabase()
 
-# ----------------- USER INTERFACE ARCHITECTURE -----------------
+#  USER INTERFACE ARCHITECTURE 
 root = tk.Tk()
 root.title("Student Performance Evaluation")
 root.geometry("900x650")
 root.configure(bg="#d9e8ff")
 
-# ===== HEADER =====
+#  HEADER 
 header = tk.Label(root, text="Student Performance Evaluation Form",
                   font=("Helvetica", 22, "bold"), bg="#d9e8ff")
 header.pack(pady=20)
 
-# ===== MAIN FRAME =====
+# MAIN FRAME 
 main_frame = tk.Frame(root, bg="#d9e8ff")
 main_frame.pack(pady=10)
 
@@ -72,7 +72,7 @@ def create_field(label_text, row):
     entry.grid(row=row, column=1, padx=10, pady=8)
     return entry
 
-# ===== ENTRY CORE VALUES =====
+# ENTRY CORE VALUES 
 name_entry = create_field("Student Name:", 0)
 father_entry = create_field("Father's Name:", 1)
 
@@ -99,7 +99,7 @@ english_entry = create_field("English Marks (0-100):", 5)
 science_entry = create_field("Science Marks (0-100):", 6)
 total_entry = create_field("Expected Total Marks:", 7)
 
-# ===== REMARKS PANELS =====
+# REMARKS PANELS 
 remarks_label = tk.Label(root, text="Teacher Remarks Evaluation:",
                          font=("Arial", 12, "bold"), bg="#d9e8ff")
 remarks_label.pack()
@@ -107,7 +107,7 @@ remarks_label.pack()
 remarks_box = tk.Text(root, height=4, width=80, font=("Arial", 12))
 remarks_box.pack(pady=10)
 
-# ===== STRUCTURAL DATA VALIDATION ENGINE =====
+# STRUCTURAL DATA VALIDATION ENGINE 
 def validate():
     if not name_entry.get().strip() or not father_entry.get().strip():
         messagebox.showerror("Validation Failure", "Student identity cannot be left empty.")
@@ -141,7 +141,7 @@ def validate():
 
     return True
 
-# ===== OPERATIONS PIPELINE LOGIC =====
+# OPERATIONS PIPELINE LOGIC 
 def submit():
     if validate():
         success = db.insert_record(
