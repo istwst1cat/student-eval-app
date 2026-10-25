@@ -3,16 +3,15 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from datetime import datetime
 
-#  RELATIONAL DATABASE SYSTEM LAYER 
+# Database setup for managing student records
 class PerformanceDatabase:
     def __init__(self, db_name="performance_records.db"):
-        """Initializes secure relational SQLite data architecture."""
         self.conn = sqlite3.connect(db_name)
         self.cursor = self.conn.cursor()
         self._build_infrastructure()
 
     def _build_infrastructure(self):
-        """Constructs indexed system tables to prevent data loss threads."""
+        # Creates the evaluations table if it doesn't exist yet.
         self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS evaluations (
                 record_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -31,7 +30,7 @@ class PerformanceDatabase:
         self.conn.commit()
 
     def insert_record(self, name, father, cls, sec, math, eng, sci, total, remarks):
-        """Streams sanitized academic vectors directly into permanent disk storage."""
+        """Cleans names and inserts a new row into the local database."""
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         try:
             self.cursor.execute("""
@@ -42,24 +41,24 @@ class PerformanceDatabase:
             self.conn.commit()
             return True
         except sqlite3.Error as e:
-            print(f"Database Pipeline Fault: {e}")
+            print(f"Database error: {e}")
             return False
 
-# Initialize database globally
+# Start database
 db = PerformanceDatabase()
 
-#  USER INTERFACE ARCHITECTURE 
+# GUI Window Setup
 root = tk.Tk()
 root.title("Student Performance Evaluation")
 root.geometry("900x650")
 root.configure(bg="#d9e8ff")
 
-#  HEADER 
+# Header Section
 header = tk.Label(root, text="Student Performance Evaluation Form",
                   font=("Helvetica", 22, "bold"), bg="#d9e8ff")
 header.pack(pady=20)
 
-# MAIN FRAME 
+# Form Layout Frame
 main_frame = tk.Frame(root, bg="#d9e8ff")
 main_frame.pack(pady=10)
 
@@ -72,7 +71,7 @@ def create_field(label_text, row):
     entry.grid(row=row, column=1, padx=10, pady=8)
     return entry
 
-# ENTRY CORE VALUES 
+# Form Input Fields
 name_entry = create_field("Student Name:", 0)
 father_entry = create_field("Father's Name:", 1)
 
@@ -99,49 +98,50 @@ english_entry = create_field("English Marks (0-100):", 5)
 science_entry = create_field("Science Marks (0-100):", 6)
 total_entry = create_field("Expected Total Marks:", 7)
 
-# REMARKS PANELS 
-remarks_label = tk.Label(root, text="Teacher Remarks Evaluation:",
+# Remarks Field
+remarks_label = tk.Label(root, text="Teacher Remarks:",
                          font=("Arial", 12, "bold"), bg="#d9e8ff")
 remarks_label.pack()
 
 remarks_box = tk.Text(root, height=4, width=80, font=("Arial", 12))
 remarks_box.pack(pady=10)
 
-# STRUCTURAL DATA VALIDATION ENGINE 
+# Input Validation Logic
 def validate():
     if not name_entry.get().strip() or not father_entry.get().strip():
-        messagebox.showerror("Validation Failure", "Student identity cannot be left empty.")
+        messagebox.showerror("Validation Error", "Student name and Father's name cannot be empty.")
         return False
 
     if not class_var.get() or not section_var.get():
-        messagebox.showerror("Validation Failure", "Please select valid structural grid groupings (Class/Section).")
+        messagebox.showerror("Validation Error", "Please select a Class and Section.")
         return False
 
-    # Numerical verification loop
+    # Check if mark entries are numbers
     entries = {"Math": math_entry, "English": english_entry, "Science": science_entry, "Total": total_entry}
     vals = {}
     
     for name, entry in entries.items():
         val_str = entry.get().strip()
         if not val_str.isdigit():
-            messagebox.showerror("Validation Failure", f"{name} parameters must consist strictly of integer digits.")
+            messagebox.showerror("Validation Error", f"{name} marks must be a valid number.")
             return False
         vals[name] = int(val_str)
 
-    # Advanced logical safety boundaries checks
+    # Check mark boundaries (0-100)
     for key in ["Math", "English", "Science"]:
         if vals[key] < 0 or vals[key] > 100:
-            messagebox.showerror("Logical Matrix Fault", f"{key} marks must settle within limits (0-100).")
+            messagebox.showerror("Input Error", f"{key} marks must be between 0 and 100.")
             return False
 
+    # Verify that individual fields add up to the actual total
     computed_sum = vals["Math"] + vals["English"] + vals["Science"]
     if vals["Total"] != computed_sum:
-        messagebox.showerror("Mathematical Disconnect", f"Reported total ({vals['Total']}) does not balance with actual sum ({computed_sum}).")
+        messagebox.showerror("Calculation Error", f"The entered total ({vals['Total']}) does not match the sum of fields ({computed_sum}).")
         return False
 
     return True
 
-# OPERATIONS PIPELINE LOGIC 
+# Save Action Logic
 def submit():
     if validate():
         success = db.insert_record(
@@ -157,10 +157,10 @@ def submit():
         )
         
         if success:
-            messagebox.showinfo("Persistence Confirmed", "Data successfully committed to SQLite storage!")
+            messagebox.showinfo("Success", "Record successfully saved to the database!")
             clear()
         else:
-            messagebox.showerror("System Failure", "Please review the information and try again.")
+            messagebox.showerror("Database Error", "Failed to save the record to local storage.")
 
 def clear():
     name_entry.delete(0, tk.END)
@@ -171,7 +171,7 @@ def clear():
         entry.delete(0, tk.END)
     remarks_box.delete("1.0", tk.END)
 
-# ===== BUTTON INTERACTION MATRIX =====
+# Form Buttons Layout
 button_frame = tk.Frame(root, bg="#d9e8ff")
 button_frame.pack(pady=15)
 
@@ -181,7 +181,7 @@ tk.Button(button_frame, text="Submit Record", font=("Helvetica", 11, "bold"),
 tk.Button(button_frame, text="Clear", font=("Helvetica", 11, "bold"),
           width=15, command=clear).grid(row=0, column=1, padx=10)
 
-tk.Button(button_frame, text="Terminate", font=("Helvetica", 11, "bold"),
+tk.Button(button_frame, text="Exit", font=("Helvetica", 11, "bold"),
           width=15, bg="#F44336", fg="white", command=root.destroy).grid(row=0, column=2, padx=10)
 
 root.mainloop()
