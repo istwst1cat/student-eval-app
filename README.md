@@ -1,8 +1,8 @@
 # Student Performance Evaluation Architecture
 
-An independent desktop environment engineered from the ground up to synthesize academic data entry with localized relational storage. Built entirely within native Python frameworks, this utility couples a structured Graphical User Interface (GUI) with precise evaluation safeguards to guarantee data integrity prior to disk persistence.
+An independent desktop environment engineered from the ground up to combine academic data entry with localized relational storage. Built entirely within native Python frameworks, this utility couples a structured Graphical User Interface (GUI) with precise evaluation safeguards to guarantee data integrity prior to disk persistence.
 
-I designed and developed this repository independently to serve as an empirical showcase of transactional logic, interface engineering, and relational database administration.
+I designed and developed this repository independently to serve as a showcase of transactional logic, interface engineering, and relational database administration.
 
 ## Technical Implementations
 
