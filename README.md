@@ -7,7 +7,7 @@ I designed and developed this repository independently to serve as a showcase of
 ## Technical Implementations
 
 * **Isolated Persistence Layer:** Systematically maps unstructured runtime inputs directly to a local SQLite backend (`performance_records.db`), ensuring reliable data records.
-* **Conditional Input Guards:** Enforces strict execution loops that constrain numerical grades to valid academic boundaries (0–100) before any write operation occurs.
+* **Conditional Input Guards:** Enforces strict execution loops that bounds grades to valid academic boundaries (0–100) before any write operation occurs.
 * **Mathematical Checks:** Evaluates individual subject matrices in the background, validating that the computed sum corresponds perfectly with manual totals to block anomalous entries.
 * **String Standardization Filters:** Uses integrated sanitization routines to eliminate trailing whitespace and enforce standard title-casing across database records.
 
